@@ -51,7 +51,6 @@ const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
 
             case 'cubeSend':
                 if(msg.name != name){
-                    maxapi.post('other user')
                     maxapi.outlet(msg.data)
                 } else{
                     // ignore messages originating from this instance
@@ -66,7 +65,7 @@ const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
     });
 
 maxapi.addHandler("cubeSend", (msg) => {
-    maxapi.post('msg',msg)
+    
     ws.send(JSON.stringify({
         cmd: 'cubeSend',
         data: msg,

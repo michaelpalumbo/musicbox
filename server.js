@@ -13,7 +13,7 @@ let name;
 
 let listenPort = (process.env.PORT || 8081)
 
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: listenPort });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
