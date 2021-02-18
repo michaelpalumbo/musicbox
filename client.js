@@ -11,8 +11,8 @@ let name;
     maxapi.post(name +  ' connecting to server')
 })();
 
-const serverIP = `ws://localhost:8081`;
-// const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
+// const serverIP = `ws://localhost:8081`;
+const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
     // options for the reconnecting websocket
     const rwsOptions = {
         // make rws use the webSocket module implementation
