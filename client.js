@@ -11,8 +11,8 @@ let name;
     maxapi.post(name +  ' connecting to server')
 })();
 
-// const serverIP = `ws://localhost:8080`;
-const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
+const serverIP = `ws://localhost:8081`;
+// const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
     // options for the reconnecting websocket
     const rwsOptions = {
         // make rws use the webSocket module implementation
@@ -56,7 +56,41 @@ const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
                     // ignore messages originating from this instance
                 }
             break;
+            
+            case "cubeState":
 
+                if(msg.name != name){
+                    // maxapi.outlet(msg.data)
+
+                    // pass the selected cubes out
+                    let selected = msg.data.selectedCubes
+
+                    //iterate thru the cube array, passing it out to the patch
+                    for(i=0;i<selected.length;i++){
+                        maxapi.post('selectedarray', i, selected[i])
+                    }
+                    maxapi.outlet(msg.data.selectedCubes)
+
+                    // pass any position data
+                    let positions = Object.keys(msg.data.position)
+                    for (const pos of positions) {
+                    //console.log(pos)
+                    maxapi.outlet(msg.data.position[pos])
+
+                    }
+
+                    let rotations = Object.keys(msg.data.rotate)
+                    for (const rot of rotations) {
+                    //console.log(pos)
+                        maxapi.outlet(msg.data.rotate[rot])
+
+                    }
+                } else{
+                    // ignore messages originating from this instance
+                }
+
+                //todo: iterate through msg.data.rotate and -position and pass each entry out
+            break
             default:
                 // inform user that unknown message commang used
                 console.log('client sent message with unknown cmd: ' + msg)
@@ -70,5 +104,6 @@ maxapi.addHandler("cubeSend", (msg) => {
         cmd: 'cubeSend',
         data: msg,
         name: name
+
     }))
 });
