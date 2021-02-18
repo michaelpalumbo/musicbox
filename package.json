@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/michaelpalumbo/musicbox/issues"
   },
-  "homepage": "https://github.com/michaelpalumbo/musicbox#readme"
+  "homepage": "https://github.com/michaelpalumbo/musicbox#readme",
+  "dependencies": {
+    "reconnecting-websocket": "^4.4.0",
+    "username": "^5.1.0",
+    "ws": "^7.4.3"
+  }
 }

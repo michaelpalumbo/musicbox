@@ -2,7 +2,6 @@ const WebSocket = require('ws');
 const username = require('username')
 const maxapi = require('max-api')
 let ws; // keep this here
-
 const ReconnectingWebSocket = require('reconnecting-websocket');
 
 
@@ -12,8 +11,8 @@ let name;
     maxapi.post(name +  ' connecting to server')
 })();
 
-const serverIP = `ws://localhost:8080`;
-// const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
+// const serverIP = `ws://localhost:8080`;
+const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
     // options for the reconnecting websocket
     const rwsOptions = {
         // make rws use the webSocket module implementation
