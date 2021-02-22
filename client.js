@@ -28,17 +28,18 @@ const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
 
     // if the server responds with an error
     ws.addEventListener('error', () => {
-        maxapi.post(`connection error: ${serverIP}`);
+        //maxapi.post(`connection error: ${serverIP}`);
        
     });
     // on successful connection to server:
     ws.addEventListener('open', () => {
-        maxapi.post(`connected to server at ${serverIP}`)
+        maxapi.outlet('connectionStatus', 1)
 
     });
     // on close:
     ws.addEventListener('close', () => {
-        maxapi.post("server connection closed");
+		maxapi.outlet('connectionStatus', 0)
+        //maxapi.post("server connection closed");
         // localSend.close();
         // localReceive.close();
     });
@@ -64,10 +65,16 @@ const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
 
                     // pass the selected cubes out
                     let selected = msg.data.selectedCubes
-
+                    maxapi.post('cubes', selected)
                     //iterate thru the cube array, passing it out to the patch
                     for(i=0;i<selected.length;i++){
-                        maxapi.post('selectedarray', i, selected[i])
+                        // for some reason, the '1' values are strings
+                        if(typeof selected[i] == 'string'){
+                            maxapi.outlet('selectedarray', i, parseInt(selected[i]))
+                        } else {
+                            maxapi.outlet('selectedarray', i, selected[i])
+                        }
+                        
                     }
                     maxapi.outlet(msg.data.selectedCubes)
 
