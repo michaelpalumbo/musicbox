@@ -70,9 +70,10 @@ const serverIP = `ws://musicbox-dino.herokuapp.com/8081`;
                     for(i=0;i<selected.length;i++){
                         // for some reason, the '1' values are strings
                         if(typeof selected[i] == 'string'){
-                            maxapi.outlet('selectedarray', i, parseInt(selected[i]))
+                            maxapi.post('target', i, parseInt(selected[i]))
+                            maxapi.outlet('startArray', i, parseInt(selected[i]))
                         } else {
-                            maxapi.outlet('selectedarray', i, selected[i])
+                            maxapi.outlet('startArray', i, selected[i])
                         }
                         
                     }
